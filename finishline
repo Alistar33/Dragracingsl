@@ -16,7 +16,7 @@ integer linetrackchannelleft() {
     return (integer)llGetSubString(setint, 0, 7);
 }
 //          0         //
-
+// EDIT: after some study, this function returns the real channel and it's [11:29] Object grida: -1910554504, a secure and complex channel.
 
 default
 {
