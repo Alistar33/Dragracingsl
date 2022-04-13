@@ -1,0 +1,31 @@
+// I am having issues to understand why each script has this fuctions before the default state
+// key linetrackchannelleftkey reminds to a resident called Hao Zaytsev, probably the creator.
+//formula on line 15 string setint that use inetrackchannelleftnumber and key residents returns this message [10:37] Object: 62198720 so it takes nr 0 (6) and nr 7 (0).
+//But why? llRegionSay in all scripts send a message to the functions, in this case linetrackchannelleft(), but isn't easier just declare a channel nr and not use that?
+
+// LEFT TRACK CHANNEL START LINE
+
+//linetrackchannelleft//
+integer linetrackchannelleftnumber = 13;
+key linetrackchannelleftkey = "f60670d0-16ce-43cf-8ec6-edd4ecc361d9";
+integer linetrackchannelleft() {
+    string seti = "phrasego";
+    key     channelkey    = linetrackchannelleftkey;
+    integer channelnumber = linetrackchannelleftnumber;
+    string setint = (string)((integer)("0x"+llGetSubString((string)channelkey,-8,-1)) * llStringLength(seti) * llCeil(llLog(llStringLength(seti)))*channelnumber);
+    return (integer)llGetSubString(setint, 0, 7);
+}
+//          0         //
+
+
+default
+{
+    
+    state_entry(){  llVolumeDetect(TRUE); }
+  collision_end(integer num)
+    {
+       key  detectedracer = llDetectedOwner(0);  
+        
+        
+         llRegionSay(linetrackchannelleft(),"finish|"+(string)detectedracer);}
+}
